@@ -3,11 +3,10 @@ import Navbar from "./Navbar";
 
 function Layout() {
   return (
-    <>
-      {/* <p>Hello, this should be navbar</p> */}
+    <div>
       <Navbar />
       <Outlet />
-    </>
+    </div>
   );
 }
 

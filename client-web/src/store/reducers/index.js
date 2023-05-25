@@ -1,9 +1,11 @@
 import { combineReducers } from "redux";
 import pokemonReducer from "./pokemon";
-import pokemonCardReducer from "./card";
+import detailReducer from "./detail";
+import evolutionReducer from "./evo";
 
 export const rootReducer = combineReducers({
   //    reducers list
   pokemonReducer,
-  pokemonCardReducer,
+  detailReducer,
+  evolutionReducer,
 });

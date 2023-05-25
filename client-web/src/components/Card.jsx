@@ -1,6 +1,11 @@
 // import effect, state
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  getTypeBackgroundColor,
+  capitalizeFirstWord,
+  getTypeButtonColor,
+} from "../function";
 
 export default function Card({ pokemon }) {
   //   declaration;
@@ -26,54 +31,23 @@ export default function Card({ pokemon }) {
     fetchPokemon();
   }, []);
 
-  //   console.log("pokemonData :", pokemonData);
-
-  function capitalizeFirstWord(sentence) {
-    return sentence.charAt(0).toUpperCase() + sentence.slice(1);
-  }
-
-  function getTypeBackgroundColor(type) {
-    switch (type) {
-      case "grass":
-        // return "bg-green-500 ";
-        return "bg-teal-300";
-      case "fire":
-        return "bg-red-500 ";
-      case "water":
-        return "bg-blue-100";
-      default:
-        return "bg-gray-100";
-    }
-  }
-
-  function getTypeButtonColor(type) {
-    switch (type) {
-      case "grass":
-        return "bg-teal-500 ";
-      case "fire":
-        return "bg-red-700 ";
-      case "water":
-        return "bg-blue-700";
-      default:
-        return "bg-gray-300";
-    }
-  }
+  console.log("pokemonData :", pokemonData);
 
   return (
     <>
-      <div className=" m-6 max-w-sm dark:bg-gray-800 dark:border-gray-700">
+      <div className=" m-6 max-w-sm dark:bg-gray-800 dark:border-gray-700 drop-shadow-xl">
         <div
           className={`h-48 rounded-3xl rounded-br-none ${getTypeBackgroundColor(
             pokemonData?.types[0]?.type?.name
           )}  border border-slate`}
         >
-          <a href="#">
+          <Link to={`/monster/${pokemonData?.id}`} href="#">
             <img
-              className="rounded-t-lg"
+              className="rounded-t-lg scale-125"
               src="/docs/images/blog/image-1.jpg"
               alt=""
             />
-          </a>
+          </Link>
           <div className="p-5 grid grid-cols-2">
             <div>
               <a href="#">
@@ -88,9 +62,10 @@ export default function Card({ pokemon }) {
                   );
                 })}
               </p>
-              <a
+              <Link
+                to={`/monster/${pokemonData?.id}`}
                 href="#"
-                className={`inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-500 rounded-lg hover:bg-slate-600 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ${getTypeButtonColor(
+                className={`inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg hover:bg-slate-600 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ${getTypeButtonColor(
                   pokemonData?.types[0]?.type?.name
                 )} `}
               >
@@ -108,7 +83,7 @@ export default function Card({ pokemon }) {
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-              </a>
+              </Link>
             </div>
             <div>
               <img

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { searchMonster } from "../store/action/actionCreator";
+import toaster from "../../toaster";
 
 export default function Navbar() {
   const dispatch = useDispatch();
@@ -19,13 +20,16 @@ export default function Navbar() {
       try {
         console.log("pokemon :", pokemon);
         const response = await dispatch(searchMonster(pokemon));
-        if (response) {
+        console.log("response :", response);
+        if (!response) {
+          navigate("/notfound");
+        } else {
           setidPokemon(response?.id);
           setSearchCount(prevCount => prevCount + 1);
         }
         setPokemon("");
       } catch (err) {
-        console.log("err :", err);
+        console.log("err navbar:", err);
         console.log("monster tidak ditemukan");
       }
     }

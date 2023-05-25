@@ -77,7 +77,7 @@ export const searchMonster = monsterName => {
       });
       return response;
     } catch (err) {
-      console.log("err :", err);
+      console.log("err di action:", err);
     }
   };
 };

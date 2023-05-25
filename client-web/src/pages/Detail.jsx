@@ -43,8 +43,8 @@ function Detail() {
     const paddedNumber = number.toString().padStart(4, "0");
     return paddedNumber;
   }
-  console.log("pokemonData :", pokemonData);
-  console.log("evolution :", evolution);
+  // console.log("pokemonData :", pokemonData);
+  // console.log("evolution :", evolution);
   return (
     <>
       {pokemonData && (
@@ -54,7 +54,6 @@ function Detail() {
           )} text-center drop-shadow-2xl border`}
         >
           <div className="">
-            {/* <img src="https://raw.githubusercontent.com/gist/Galadirith/baaf38c7286b568973cc50a50ff57f4d/raw/34d60cae491bc505c212398b94f12705665c12fc/pokeball.svg" /> */}
             <img
               src={pokemonData?.sprites?.other?.dream_world?.front_default}
               className="mx-auto drop-shadow-2xl"
@@ -69,7 +68,7 @@ function Detail() {
                       pokemonData?.types[0]?.type?.name
                     )} rounded-xl mb-2 w-24 ml-96 drop-shadow-2xl`}
                   >
-                    <div className="text-yellow-50 text-xl text-left pl-5">
+                    <div className="text-yellow-50 text-xl text-left pl-4">
                       {type?.type?.name}
                     </div>
                   </div>

@@ -1,28 +1,53 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
+import { searchMonster } from "../store/action/actionCreator";
 
 export default function Navbar() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [pokemon, setPokemon] = useState("");
+  const [searchCount, setSearchCount] = useState(0);
+  const [idPokemon, setidPokemon] = useState();
 
   const handleChange = e => {
     const { value, name } = e.target;
     setPokemon(value);
   };
-
-  const handleSearch = () => {
-    console.log("pokemon :", pokemon);
+  const handleSearch = async e => {
+    if (e.keyCode === 13) {
+      try {
+        console.log("pokemon :", pokemon);
+        const response = await dispatch(searchMonster(pokemon));
+        if (response) {
+          setidPokemon(response?.id);
+          setSearchCount(prevCount => prevCount + 1);
+        }
+        setPokemon("");
+      } catch (err) {
+        console.log("err :", err);
+        console.log("monster tidak ditemukan");
+      }
+    }
   };
+
+  useEffect(() => {
+    if (idPokemon) {
+      navigate(`/monster/${idPokemon}`);
+    }
+  }, [idPokemon]);
 
   return (
     <>
       <nav className="bg-white border-gray-200 dark:bg-gray-900 mt-4 mx-12">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <a href="https://flowbite.com/" className="flex items-center">
+          <Link to={"/"} className="flex items-center">
             <img
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzUTeVVyfpGhnSHpou-Id2n-iuwdmeLiZ6JA&usqp=CAU"
               className="h-8 mr-3"
               alt="Pokemon Logo"
             />
-          </a>
+          </Link>
           <div className="flex md:order-2">
             <button
               type="button"
@@ -71,7 +96,7 @@ export default function Navbar() {
                 onChange={handleChange}
                 name="pokemon"
                 value={pokemon}
-                onKeyDown={handleSearch}
+                onKeyDown={e => handleSearch(e)}
               />
             </div>
             <button

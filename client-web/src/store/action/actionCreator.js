@@ -60,3 +60,24 @@ export const fetchEvolution = id => {
     }
   };
 };
+
+export const searchMonster = monsterName => {
+  return async dispatch => {
+    try {
+      const res = await fetch(`${BASE_URL}pokemon/${monsterName}`);
+
+      if (!res.ok) throw await res.text();
+
+      const response = await res.json();
+      console.log("response :", response);
+
+      dispatch({
+        type: "fetchDetailSuccess",
+        payload: response,
+      });
+      return response;
+    } catch (err) {
+      console.log("err :", err);
+    }
+  };
+};

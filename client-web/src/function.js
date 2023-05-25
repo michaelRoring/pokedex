@@ -20,6 +20,12 @@ export function getTypeBackgroundColor(type) {
       return "bg-yellow-400";
     case "ground":
       return "bg-orange-700";
+    case "psychic":
+      return "bg-purple-600";
+    case "rock":
+      return "bg-slate-600";
+    case "ghost":
+      return "bg-pink-600";
     default:
       return "bg-gray-300";
   }
@@ -43,6 +49,12 @@ export function getTypeButtonColor(type) {
       return "bg-yellow-700";
     case "ground":
       return "bg-orange-900";
+    case "psychic":
+      return "bg-purple-900";
+    case "rock":
+      return "bg-slate-900";
+    case "ghost":
+      return "bg-pink-900";
     default:
       return "bg-gray-700";
   }
